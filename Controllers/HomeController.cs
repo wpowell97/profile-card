@@ -2,6 +2,8 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ProfileCardApp.Models;
 using ProfileCardApp.Data;
+using ProfileCardApp.Services;
+
 
 namespace ProfileCardApp.Controllers
 {
@@ -9,11 +11,14 @@ namespace ProfileCardApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _dbContext;
+        private readonly EmailService _emailService;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext dbContext)
+
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext dbContext, EmailService emailService)
         {
             _logger = logger;
             _dbContext = dbContext;
+            _emailService = emailService;
         }
 
         [HttpGet]
@@ -23,7 +28,7 @@ namespace ProfileCardApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(ContactFormViewModel model)
+        public async Task<IActionResult> Index(ContactFormViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -34,15 +39,17 @@ namespace ProfileCardApp.Controllers
                     Message = model.Message
                 };
 
-                _dbContext.ContactMessages.Add(message);
-                _dbContext.SaveChanges();
+                    _dbContext.ContactMessages.Add(message);
+                    await _dbContext.SaveChangesAsync();
 
-                TempData["SuccessMessage"] = "Message saved successfully!";
-                return RedirectToAction("Index");
+                    await _emailService.SendContactMessageAsync(message);
+
+                    TempData["SuccessMessage"] = "Message saved and emailed successfully!";
+                    return RedirectToAction("Index");
+                }
+
+                return View(model);
             }
-
-            return View(model);
-        }
 
         public IActionResult Privacy()
         {
