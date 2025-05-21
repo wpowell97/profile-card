@@ -1,7 +1,6 @@
 services:
   - type: web
     name: profile-card-app
-    runtime: dotnet
     repo: https://github.com/wpowell97/profile-card
     branch: main
     buildCommand: dotnet build
