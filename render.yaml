@@ -6,7 +6,6 @@ services:
     branch: main
     buildCommand: dotnet build
     startCommand: dotnet ProfileCardApp.dll
-    buildFilter: true
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
