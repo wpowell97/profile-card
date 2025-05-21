@@ -4,42 +4,46 @@
     ViewData["Title"] = "Profile Card";
 }
 
-<div class="container d-flex justify-content-center align-items-center bg-light">
-    <div class="w-100" style="max-width: 400px;">
-        @await Component.InvokeAsync("ProfileBox")
+<div class="container bg-light py-5">
+    <div class="row justify-content-center">
+        <!-- Profile Card -->
+        <div class="col-lg-5 mb-4">
+            @await Component.InvokeAsync("ProfileBox")
+        </div>
 
-        @if (TempData["SuccessMessage"] != null)
-{
-    <div class="alert alert-success mt-4">@TempData["SuccessMessage"]</div>
-}
+        <!-- Contact Form -->
+        <div class="col-lg-6">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+            }
 
-<h4 class="mt-5">Contact Me</h4>
-<form asp-action="Index" method="post" class="mt-3">
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger small"></span>
+            <h4>Contact Me</h4>
+            <form asp-action="Index" method="post" class="mt-3">
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Message" class="form-label"></label>
+                    <textarea asp-for="Message" rows="4" class="form-control"></textarea>
+                    <span asp-validation-for="Message" class="text-danger small"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Send</button>
+            </form>
+        </div>
     </div>
-
-    <div class="mb-3">
-        <label asp-for="Email" class="form-label"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger small"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Message" class="form-label"></label>
-        <textarea asp-for="Message" rows="4" class="form-control"></textarea>
-        <span asp-validation-for="Message" class="text-danger small"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Send</button>
-</form>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-
-
-    </div>
-</div>

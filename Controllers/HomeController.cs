@@ -1,22 +1,24 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ProfileCardApp.Models;
+using ProfileCardApp.Data;
 
 namespace ProfileCardApp.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _dbContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext dbContext)
         {
             _logger = logger;
+            _dbContext = dbContext;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            // Pass a blank form model to the view
             return View(new ContactFormViewModel());
         }
 
@@ -25,12 +27,20 @@ namespace ProfileCardApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                // You can log, store or simulate sending the data here
-                TempData["SuccessMessage"] = "Message sent successfully!";
+                var message = new ContactMessage
+                {
+                    Name = model.Name,
+                    Email = model.Email,
+                    Message = model.Message
+                };
+
+                _dbContext.ContactMessages.Add(message);
+                _dbContext.SaveChanges();
+
+                TempData["SuccessMessage"] = "Message saved successfully!";
                 return RedirectToAction("Index");
             }
 
-            // Return view with validation errors
             return View(model);
         }
 
