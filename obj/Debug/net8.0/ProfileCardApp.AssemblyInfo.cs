@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ProfileCardApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aed1afd97a6ae10a4101755d461e4a97d8344cbd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d2d2cfb651a81b18fb027adf411de63680ca0455")]
 [assembly: System.Reflection.AssemblyProductAttribute("ProfileCardApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ProfileCardApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
