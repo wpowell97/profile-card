@@ -6,7 +6,7 @@
 
 <div class="container bg-light py-5">
     <div class="row justify-content-center">
-        
+
         <!-- Profile Card -->
         <div class="col-lg-5 mb-4">
             @await Component.InvokeAsync("ProfileBox")
@@ -54,22 +54,6 @@
         </div>
     </div>
 </div>
-
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
-}
-
-@if (TempData["WarningMessage"] != null)
-{
-    <div class="alert alert-warning">@TempData["WarningMessage"]</div>
-}
-
-@if (TempData["ErrorMessage"] != null)
-{
-    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
-}
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

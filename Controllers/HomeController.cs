@@ -1,9 +1,9 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProfileCardApp.Models;
 using ProfileCardApp.Data;
 using ProfileCardApp.Services;
-using Microsoft.EntityFrameworkCore;
 
 namespace ProfileCardApp.Controllers
 {
