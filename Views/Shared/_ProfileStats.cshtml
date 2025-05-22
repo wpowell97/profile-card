@@ -1,16 +1,22 @@
 @model ProfileCardApp.Models.ProfileModel
 
-<div class="d-flex justify-content-around border-top pt-3">
-    <div>
-        <strong class="d-block fs-5">@Model.Followers</strong>
-        <small class="text-muted">Followers</small>
+<div class="row text-center border-top pt-4">
+    <div class="col-4">
+        <div class="fw-bold fs-5">@Model.Followers</div>
+        <div class="text-muted small">
+            <i class="bi bi-people-fill me-1"></i>Followers
+        </div>
     </div>
-    <div>
-        <strong class="d-block fs-5">@Model.Likes</strong>
-        <small class="text-muted">Likes</small>
+    <div class="col-4">
+        <div class="fw-bold fs-5">@Model.Likes</div>
+        <div class="text-muted small">
+            <i class="bi bi-hand-thumbs-up-fill me-1"></i>Likes
+        </div>
     </div>
-    <div>
-        <strong class="d-block fs-5">@Model.Photos</strong>
-        <small class="text-muted">Photos</small>
+    <div class="col-4">
+        <div class="fw-bold fs-5">@Model.Photos</div>
+        <div class="text-muted small">
+            <i class="bi bi-images me-1"></i>Photos
+        </div>
     </div>
 </div>
