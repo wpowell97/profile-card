@@ -6,6 +6,9 @@ using ProfileCardApp.Models;
 
 namespace ProfileCardApp.Services
 {
+    /// <summary>
+    /// Handles submission of contact forms to HubSpot via REST API.
+    /// </summary>
     public class HubSpotService
     {
         private readonly HubSpotSettings _settings;

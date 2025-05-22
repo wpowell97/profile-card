@@ -1,0 +1,35 @@
+@model List<ProfileCardApp.Models.ContactMessage>
+
+@{
+    ViewData["Title"] = "Recent Contact Submissions";
+}
+
+<h2>Recent Submissions</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+@if (Model.Any())
+{
+    <div class="row">
+        @foreach (var message in Model)
+        {
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">@message.Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@message.Email</h6>
+                        <p class="card-text">@message.Message</p>
+                        <small class="text-muted">Submitted: @message.SubmittedAt.ToString("g")</small>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>No messages have been submitted yet.</p>
+}
