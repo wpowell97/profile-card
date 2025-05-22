@@ -11,14 +11,14 @@ namespace ProfileCardApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _dbContext;
-        private readonly EmailService _emailService;
+        private readonly HubSpotService _hubSpotService;
 
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext dbContext, EmailService emailService)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext dbContext, HubSpotService hubSpotService)
         {
             _logger = logger;
             _dbContext = dbContext;
-            _emailService = emailService;
+            _hubSpotService = hubSpotService;
         }
 
         [HttpGet]
@@ -39,17 +39,25 @@ namespace ProfileCardApp.Controllers
                     Message = model.Message
                 };
 
-                    _dbContext.ContactMessages.Add(message);
-                    await _dbContext.SaveChangesAsync();
+                _dbContext.ContactMessages.Add(message);
+                await _dbContext.SaveChangesAsync();
 
-                    await _emailService.SendContactMessageAsync(message);
-
-                    TempData["SuccessMessage"] = "Message saved and emailed successfully!";
-                    return RedirectToAction("Index");
+                try
+                {
+                    await _hubSpotService.SubmitFormAsync(model);
+                    TempData["SuccessMessage"] = "Message saved and sent to HubSpot!";
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"HubSpot submission failed: {ex.Message}");
+                    TempData["SuccessMessage"] = "Saved, but HubSpot submission failed.";
                 }
 
-                return View(model);
+                return RedirectToAction("Index");
             }
+
+            return View(model);
+        }
 
         public IActionResult Privacy()
         {

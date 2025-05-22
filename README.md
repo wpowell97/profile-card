@@ -110,6 +110,27 @@ Then visit: [https://localhost:5001](https://localhost:5001) or [http://localhos
 
 ---
 
+---
+
+## 📬 HubSpot Integration
+
+This project submits contact form entries to HubSpot using their Forms API.
+
+### 🛠 Requirements
+
+- A HubSpot **Portal ID**
+- A **Form ID (GUID)** from a HubSpot form
+- A **Private App Token** (HubSpot > Settings > Integrations > Private Apps)
+
+### 🔧 Configuration (`appsettings.json`)
+
+```json
+"HubSpotSettings": {
+  "PortalId": "YOUR_PORTAL_ID",
+  "FormId": "YOUR_FORM_GUID",
+  "ApiToken": "YOUR_PRIVATE_APP_TOKEN"
+}
+
 ## 💡 Future Ideas
 
 - Admin panel to browse messages

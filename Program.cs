@@ -11,8 +11,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ProfilePage")));
 
-builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
-builder.Services.AddScoped<EmailService>();
+builder.Services.Configure<HubSpotSettings>(builder.Configuration.GetSection("HubSpotSettings"));
+builder.Services.AddScoped<HubSpotService>();
 
 var app = builder.Build();
 
